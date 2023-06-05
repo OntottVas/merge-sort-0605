@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Main {
     public static void main(String[] args) {
         System.out.println("Merge sort");
@@ -6,8 +8,8 @@ public class Main {
     }
 
     public static boolean isSorted(int[] array) {
-        for (int i = 0; i < array.length-1; i++) {
-            if(array[i] > array[i+1]) {
+        for (int i = 0; i < array.length - 1; i++) {
+            if (array[i] > array[i + 1]) {
                 return false;
             }
         }
@@ -20,7 +22,18 @@ public class Main {
     }
 
     public static int[] mergeSort(int[] array) {
+        if (isSorted(array)) {
+            return array;
+        }
 
-        return null;
+        int[] left = Arrays.copyOfRange(array, 0, array.length / 2);
+        int[] right = Arrays.copyOfRange(array, array.length / 2, array.length);
+
+        left = mergeSort(left);
+        right = mergeSort(right);
+
+        int[] mergedArray = merge(left, right);
+
+        return mergedArray;
     }
 }
